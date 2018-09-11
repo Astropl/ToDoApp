@@ -94,26 +94,25 @@ public class App {
 
             System.out.println("========================");
             System.out.println("= " + tasks[i]);
-changeLog("Show: Lists of Task");
+            changeLog("Show: Lists of Task");
         }
 
     }
 
-    public static void changeLog(String log)
-    {
+    public static void changeLog(String log) {
+        boolean hasCapacityChangeLog = changeLogCount < changeLog.length;
+        if (hasCapacityChangeLog) {
+            for (int i = 0; i < changeLogCount + 1; i++) {
+                changeLog[i + 1] = changeLog[i];
+                changeLog[i] = log;
 
-        for (int i=0;i<changeLogCount+1;i++) {
-            changeLog[i+1]= changeLog[i];
-            changeLog[i] = log;
-
-        }changeLogCount++;
-
+            }
+            changeLogCount++;
+        }
     }
 
-    public static void displayChangeLog()
-    {
-        for ( int i =0; i<changeLogCount;i++)
-        {
+    public static void displayChangeLog() {
+        for (int i = 0; i < changeLogCount; i++) {
             System.out.println(changeLog[i]);
         }
         changeLog("Show all change log");
