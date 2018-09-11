@@ -1,5 +1,7 @@
 package astro;
 
+import java.util.Scanner;
+
 /**
  * Hello world!
  */
@@ -13,7 +15,41 @@ public class App {
     static int changeLogCount = 0;
 
     public static void main(String[] args) {
-        displayMenu();
+        Scanner sc = new Scanner(System.in);
+        int radix;
+        boolean isApplicationRun = true;
+
+        while (isApplicationRun) {
+            displayMenu();
+            System.out.println("Type number to choose option");
+            radix = sc.nextInt();
+            switch (radix) {
+                default:
+                    System.out.println("Nie ma takiej opcji");
+                    break;
+                case 1:
+                    System.out.println("Podaj nazwe zadania do dodania");
+                    String task = sc.next();
+                    addTask(task);
+                    break;
+                case 2:
+                    System.out.println("Podaj index zadania do usuniecia");
+                    int index = sc.nextInt();
+                    removeTask(index);
+                    break;
+                case 5:
+                    displayTasks();
+                    break;
+                case 0:
+                    isApplicationRun = false;
+                    break;
+                case 7:
+                    displayChangeLog();
+            }
+
+
+        }
+
 
     }
 
@@ -36,28 +72,52 @@ public class App {
         if (hasCapacityForNewTask) {
             tasks[taskCount] = task;
             taskCount++;
+            changeLog("Add Task from list");
         }
     }
 
-    public static void removeTask (int indexTask)
-    {
-        boolean isTaskExist = indexTask<taskCount;
-        if (isTaskExist)
-        {
-            for (int i=indexTask; i<taskCount-1;i++)
-            {
-                tasks[i]=tasks[i+1];
-                taskCount--;
+    public static void removeTask(int indexTask) {
+        boolean isTaskExist = indexTask < taskCount;
+        if (isTaskExist) {
+            for (int i = indexTask; i < taskCount - 1; i++) {
+                tasks[i] = tasks[i + 1];
+
             }
+            taskCount--;
+            changeLog("Remove Task from list");
         }
     }
 
-    public static void displayTasks()
-    {
+    public static void displayTasks() {
         System.out.println("Lists of tasks");
-        for(int i=0;i<taskCount;i++)
-        {
-            System.out.println(tasks[i]);
+        for (int i = 0; i < taskCount; i++) {
+
+            System.out.println("========================");
+            System.out.println("= " + tasks[i]);
+changeLog("Show: Lists of Task");
         }
+
     }
+
+    public static void changeLog(String log)
+    {
+
+        for (int i=0;i<changeLogCount+1;i++) {
+            changeLog[i+1]= changeLog[i];
+            changeLog[i] = log;
+
+        }changeLogCount++;
+
+    }
+
+    public static void displayChangeLog()
+    {
+        for ( int i =0; i<changeLogCount;i++)
+        {
+            System.out.println(changeLog[i]);
+        }
+        changeLog("Show all change log");
+    }
+
+
 }
