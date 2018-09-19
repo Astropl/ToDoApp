@@ -72,7 +72,7 @@ public class App {
         if (hasCapacityForNewTask) {
             tasks[taskCount] = task;
             taskCount++;
-            changeLog("Add Task from list");
+            changeLog("Add Task from list" + task);
         }
     }
 
@@ -84,7 +84,7 @@ public class App {
 
             }
             taskCount--;
-            changeLog("Remove Task from list");
+            changeLog("Remove Task from list" );
         }
     }
 
@@ -94,19 +94,17 @@ public class App {
 
             System.out.println("========================");
             System.out.println("= " + tasks[i]);
-            changeLog("Show: Lists of Task");
+
         }
+        changeLog("Show: Lists of Task");
 
     }
 
     public static void changeLog(String log) {
         boolean hasCapacityChangeLog = changeLogCount < changeLog.length;
         if (hasCapacityChangeLog) {
-            for (int i = 0; i < changeLogCount + 1; i++) {
-                changeLog[i + 1] = changeLog[i];
-                changeLog[i] = log;
 
-            }
+            changeLog[changeLogCount] = log;
             changeLogCount++;
         }
     }
